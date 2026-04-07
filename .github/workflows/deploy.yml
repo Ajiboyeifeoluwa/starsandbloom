@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4  # Aligned with 'name'
+        uses: actions/checkout@v4
 
       - name: List all directories
-        run: |                    # Aligned with 'name'
+        run: |
           find . -type d
           ls -la
           mkdir olum
