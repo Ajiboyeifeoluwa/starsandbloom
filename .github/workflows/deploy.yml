@@ -17,7 +17,7 @@ jobs:
         with:
           host: ${{ secrets.STAGING_HOST }}
           username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.STAGGING_SSH_KEY }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
           source: "."
           target: "/home/ubuntu/stars-and-bloom-temp"
           rm: true
