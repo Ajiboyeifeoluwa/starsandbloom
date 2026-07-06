@@ -17,10 +17,13 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.PRODUCTION_SSH_KEY }}
           script: |
-            cd /var/www/html
+            cd /home/ubuntu/starsandbloom
 
-            git pull origin main
+            git fetch origin
+            git reset --hard origin/main
+
+            sudo rsync -av --delete ./ /var/www/html/
 
             sudo systemctl restart apache2
 
-            echo "Deployment completed successfully!"
+            echo "Deployment Successful!"
