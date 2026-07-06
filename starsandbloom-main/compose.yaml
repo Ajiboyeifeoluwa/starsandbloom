@@ -1,0 +1,41 @@
+services:
+  db:
+    image: mariadb:11
+    environment:
+      MYSQL_DATABASE: starsandbloom
+      MYSQL_USER: starsandbloom
+      MYSQL_PASSWORD: valentine
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - "./db:/docker-entrypoint-initdb.d"
+    networks:
+      - lamp-docker
+
+  www:
+    depends_on:
+      - db
+    image: ifeoluwa03/phpp:v3
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - "8990:80"
+    networks:
+      - lamp-docker
+
+  phpmyadmin:
+    image: luabikoye/aledoy-php8
+    ports:
+      - "8991:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+    depends_on:
+      - db
+    networks:
+      - lamp-docker
+
+networks:
+  lamp-docker:
+    driver: bridge
